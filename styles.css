@@ -1,0 +1,472 @@
+/* =========================================================
+   ROOT VARIABLES
+   These variables store colours and the main font.
+   We can reuse them throughout the stylesheet.
+   ========================================================= */
+
+:root { 
+  --ink: #20243a; 
+  --muted: #646a7d; 
+  --surface: #ffffff; 
+  --page: #f4f1fb; 
+  --accent: #6d4aff; 
+  --accent-dark: #4e31cf; 
+  --line: #ddd8eb; 
+  --success: #087f5b; 
+  --success-bg: #e9fbf4; 
+  --error: #b42318; 
+  --error-bg: #fff0ee; 
+
+  /* Main font used throughout the page */
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; 
+
+  /* Main text colour */
+  color: var(--ink); 
+}
+
+
+/* =========================================================
+   BOX SIZING
+   Makes width and height calculations easier.
+   ========================================================= */
+
+* { 
+  box-sizing: border-box; 
+}
+
+
+/* =========================================================
+   BODY
+   Controls the overall page background and height.
+   ========================================================= */
+
+body { 
+  margin: 0; 
+  min-height: 100vh; 
+
+  /* Creates a soft purple background effect */
+  background: 
+    radial-gradient(
+      circle at 10% 15%, 
+      rgba(109, 74, 255, 0.16), 
+      transparent 28rem
+    ), 
+    linear-gradient(
+      135deg, 
+      #f8f6ff, 
+      var(--page)
+    ); 
+}
+
+
+/* =========================================================
+   FORM ELEMENTS
+   Makes buttons, inputs and select boxes use the same font.
+   ========================================================= */
+
+button, input, select { 
+  font: inherit; 
+}
+
+
+/* =========================================================
+   PAGE SHELL
+   Main container holding the introduction and form.
+   ========================================================= */
+
+.page-shell { 
+  width: min(1120px, calc(100% - 32px)); 
+  min-height: 100vh; 
+  margin: 0 auto; 
+  padding: 48px 0; 
+
+  /* Creates the main two-column page layout */
+  display: grid; 
+
+  /* First column = introduction
+     Second column = registration form */
+  grid-template-columns: minmax(0, 0.85fr) minmax(540px, 1.15fr); 
+
+  /* Space between the introduction and form */
+  gap: 52px; 
+
+  /* Vertically centers the two sections */
+  align-items: center; 
+}
+
+
+/* =========================================================
+   INTRODUCTION SECTION
+   ========================================================= */
+
+.intro { 
+  padding: 28px 8px; 
+}
+
+
+/* Small uppercase headings such as "CAMPUS CREATE" */
+.eyebrow { 
+  margin: 0 0 10px; 
+  color: var(--accent-dark); 
+  font-size: 0.78rem; 
+  font-weight: 800; 
+  letter-spacing: 0.13em; 
+  text-transform: uppercase; 
+}
+
+
+/* =========================================================
+   HEADINGS
+   ========================================================= */
+
+h1, h2 { 
+  margin: 0; 
+  line-height: 1.08; 
+}
+
+
+/* Main page heading */
+h1 { 
+  max-width: 12ch; 
+  font-size: clamp(2.6rem, 6vw, 4.8rem); 
+}
+
+
+/* Registration heading */
+h2 { 
+  font-size: clamp(1.8rem, 3vw, 2.45rem); 
+}
+
+
+/* Introduction paragraph */
+.intro-copy { 
+  max-width: 38rem; 
+  margin: 22px 0 30px; 
+  color: var(--muted); 
+  font-size: 1.08rem; 
+  line-height: 1.7; 
+}
+
+
+/* =========================================================
+   FEATURE LIST
+   Controls the three benefits shown on the left side.
+   ========================================================= */
+
+.feature-list { 
+  display: grid; 
+  gap: 12px; 
+}
+
+
+/* Each feature is arranged horizontally */
+.feature-list article { 
+  display: flex; 
+  align-items: center; 
+  gap: 14px; 
+}
+
+
+/* Number boxes: 01, 02 and 03 */
+.feature-list article > span { 
+  width: 42px; 
+  height: 42px; 
+
+  /* Centers the number inside the box */
+  display: grid; 
+  place-items: center; 
+
+  flex: 0 0 auto; 
+  border-radius: 13px; 
+  background: var(--surface); 
+  color: var(--accent-dark); 
+  font-weight: 800; 
+
+  /* Adds a soft shadow */
+  box-shadow: 0 8px 24px rgba(59, 44, 105, 0.09); 
+}
+
+
+/* Makes feature titles and descriptions appear on separate lines */
+.feature-list strong, 
+.feature-list small { 
+  display: block; 
+}
+
+
+/* Small description underneath each feature */
+.feature-list small { 
+  margin-top: 2px; 
+  color: var(--muted); 
+}
+
+
+/* =========================================================
+   FORM CARD
+   The white container holding the registration form.
+   ========================================================= */
+
+.form-card { 
+  padding: clamp(24px, 4vw, 42px); 
+  border: 1px solid rgba(255,255,255,0.8); 
+  border-radius: 28px; 
+  background: rgba(255,255,255,0.94); 
+
+  /* Gives the card a soft shadow */
+  box-shadow: 0 24px 70px rgba(52, 38, 95, 0.16); 
+}
+
+
+/* Text underneath "Reserve your place" */
+.form-heading > p:last-child { 
+  margin: 10px 0 28px; 
+  color: var(--muted); 
+}
+
+
+/* =========================================================
+   CSS1 — FORM GRID
+   Creates two equal columns and adds spacing between fields.
+   ========================================================= */
+
+.form-grid { 
+  /* Turns the form area into a CSS Grid */
+  display: grid; 
+
+  /* Creates two equal-width columns */
+  grid-template-columns: 1fr 1fr; 
+
+  /* 17px between rows and 18px between columns */
+  gap: 17px 18px; 
+}
+
+
+/* =========================================================
+   FORM FIELDS
+   ========================================================= */
+
+.field { 
+  /* Prevents fields from becoming wider than their grid area */
+  min-width: 0; 
+}
+
+
+/* A field that should occupy both columns */
+.field.full-width { 
+  grid-column: 1 / -1; 
+}
+
+
+/* Form labels */
+label { 
+  display: inline-block; 
+  margin-bottom: 7px; 
+  font-size: 0.92rem; 
+  font-weight: 750; 
+}
+
+
+/* Small instructions underneath inputs */
+.field small { 
+  display: block; 
+  margin-top: 6px; 
+  color: var(--muted); 
+  font-size: 0.76rem; 
+  line-height: 1.35; 
+}
+
+
+/* =========================================================
+   INPUTS AND SELECT BOXES
+   ========================================================= */
+
+input, select { 
+  width: 100%; 
+  min-height: 46px; 
+  padding: 10px 12px; 
+  border: 1px solid var(--line); 
+  border-radius: 11px; 
+  background: #fff; 
+  color: var(--ink); 
+
+  /* Smooth transition when the user interacts with a field */
+  transition: border-color 160ms ease, box-shadow 160ms ease; 
+}
+
+
+/* Changes the border colour when the mouse moves over a field */
+input:hover, select:hover { 
+  border-color: #aaa1c6; 
+}
+
+
+/* =========================================================
+   KEYBOARD FOCUS
+   Shows a visible outline when navigating with the keyboard.
+   ========================================================= */
+
+input:focus-visible, 
+select:focus-visible, 
+button:focus-visible { 
+  outline: 3px solid rgba(109, 74, 255, 0.28); 
+  outline-offset: 2px; 
+}
+
+
+/* Changes the border and adds a glow when a field is selected */
+input:focus, 
+select:focus { 
+  border-color: var(--accent); 
+  box-shadow: 0 0 0 4px rgba(109, 74, 255, 0.10); 
+}
+
+
+/* =========================================================
+   AGREEMENT CHECKBOX
+   ========================================================= */
+
+.agreement { 
+  display: flex; 
+  gap: 10px; 
+  align-items: flex-start; 
+  margin: 22px 0 18px; 
+  color: var(--muted); 
+  line-height: 1.45; 
+}
+
+
+/* Styles the checkbox */
+.agreement input { 
+  width: 18px; 
+  min-height: 18px; 
+  margin-top: 2px; 
+  flex: 0 0 auto; 
+  accent-color: var(--accent); 
+}
+
+
+/* =========================================================
+   CSS2 — SUBMIT BUTTON
+   Adds the purple background and white text.
+   ========================================================= */
+
+button { 
+  width: 100%; 
+  min-height: 50px; 
+  border: 0; 
+  border-radius: 12px; 
+
+  /* Uses the purple accent colour as the button background */
+  background: var(--accent); 
+
+  /* Makes the button text white */
+  color: white; 
+
+  font-weight: 800; 
+  cursor: pointer; 
+
+  /* Adds a soft shadow underneath the button */
+  box-shadow: 0 10px 24px rgba(79, 49, 207, 0.22); 
+
+  /* Makes hover and movement effects smooth */
+  transition: transform 160ms ease, background 160ms ease; 
+}
+
+
+/* Button appearance when the mouse is over it */
+button:hover { 
+  background: var(--accent-dark); 
+  transform: translateY(-1px); 
+}
+
+
+/* Button returns to its normal position when clicked */
+button:active { 
+  transform: translateY(0); 
+}
+
+
+/* =========================================================
+   FEEDBACK MESSAGE
+   Used later by JavaScript to show success or error messages.
+   ========================================================= */
+
+.feedback { 
+  margin: 16px 0 0; 
+  padding: 13px 15px; 
+  border-radius: 11px; 
+  font-weight: 700; 
+  line-height: 1.45; 
+}
+
+
+/* Successful registration message */
+.feedback.success { 
+  color: var(--success); 
+  background: var(--success-bg); 
+}
+
+
+/* Error message */
+.feedback.error { 
+  color: var(--error); 
+  background: var(--error-bg); 
+}
+
+
+/* Highlights invalid fields after validation */
+.was-validated input:invalid, 
+.was-validated select:invalid { 
+  border-color: var(--error); 
+}
+
+
+/* =========================================================
+   RESPONSIVE DESIGN — TABLET
+   At 860px or below, the main page becomes one column.
+   ========================================================= */
+
+@media (max-width: 860px) { 
+
+  .page-shell { 
+    grid-template-columns: 1fr; 
+    gap: 22px; 
+    padding: 28px 0; 
+  } 
+
+  h1 { 
+    max-width: 16ch; 
+  } 
+
+  .intro { 
+    padding-bottom: 0; 
+  } 
+}
+
+
+/* =========================================================
+   RESPONSIVE DESIGN — MOBILE
+   At 480px or below, the form fields become one column.
+   ========================================================= */
+
+@media (max-width: 480px) { 
+
+  .page-shell { 
+    width: min(100% - 20px, 1120px); 
+  } 
+
+  .form-card { 
+    padding: 22px 16px; 
+    border-radius: 20px; 
+  } 
+
+  /* Changes the form from two columns to one column */
+  .form-grid { 
+    grid-template-columns: 1fr; 
+  } 
+
+  /* Allows full-width fields to behave normally */
+  .field.full-width { 
+    grid-column: auto; 
+  } 
+}
